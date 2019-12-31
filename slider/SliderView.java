@@ -2,6 +2,7 @@ package slider;
 
 import static slider.SliderApplication.HEIGHT;
 import static slider.SliderApplication.WIDTH;
+import static slider.SliderApplication.EMPTY_BLOCK_INDEX;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -61,7 +62,7 @@ public class SliderView extends Pane {
                 root.add(sliderButtons[row*WIDTH + col], col, row);
             }
         }
-        root.getChildren().remove(sliderButtons[WIDTH*HEIGHT-1]);  // Last one should be removed
+        sliderButtons[WIDTH*HEIGHT-1].setVisible(false);  // Last one should be hidden
 
         root.add(movesCounterLabel, 0, HEIGHT);
         root.add(winsCounterLabel, 1, HEIGHT);
@@ -77,8 +78,9 @@ public class SliderView extends Pane {
         
         model.slide(buttonIndex);
         if (model.hasWon()) {
-            System.out.println("Win!");
+            System.out.println("Win!");  // TODO handle win
         }
+        System.out.println("Slider button " + buttonIndex + " clicked, result: " + model);
         this.updateGui();
     }
 
@@ -98,8 +100,13 @@ public class SliderView extends Pane {
         for (int i = 0; i < sliderButtons.length; i++) {
             int imageIndex = model.getButtonLayout()[i];
             // sliderButtons[i].setBackground(value);  // TODO image
-
             sliderButtons[i].setText(String.valueOf(imageIndex));
+
+            // Update visibility of buttons
+            if (imageIndex == EMPTY_BLOCK_INDEX)
+                sliderButtons[i].setVisible(false);
+            else
+                sliderButtons[i].setVisible(true);
         }
         
         // Update the counters

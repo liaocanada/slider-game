@@ -4,10 +4,9 @@ import java.util.Arrays;
 
 import static slider.SliderApplication.HEIGHT;
 import static slider.SliderApplication.WIDTH;
+import static slider.SliderApplication.EMPTY_BLOCK_INDEX;
 
 public class SliderModel {
-
-    private static final int EMPTY_BLOCK_INDEX = 15;
 
     private int numWins;
     private int numMoves;
@@ -29,7 +28,7 @@ public class SliderModel {
         for (int i = 0; i < buttonLayout.length; i++)
             buttonLayout[i] = i;
 
-        shuffle();
+        // shuffle();  TODO
     }
 
     /** 
@@ -44,7 +43,7 @@ public class SliderModel {
         int targetRow = targetButtonIndex / WIDTH;
         int targetCol = targetButtonIndex % WIDTH;
         int emptyRow = emptyBlockLocation / WIDTH;
-        int emptyCol = emptyBlockLocation / HEIGHT;
+        int emptyCol = emptyBlockLocation % WIDTH;
         
         // Empty block is above/below/left of/right of clicked button
         if (
@@ -53,18 +52,18 @@ public class SliderModel {
             targetRow == emptyRow && targetCol - 1 == emptyCol ||
             targetRow == emptyRow && targetCol + 1 == emptyCol
         ) {
-            swap(targetRow, targetCol, emptyRow, emptyCol);
+            swap(targetButtonIndex, emptyBlockLocation);
             return true;
         }
 
         return false;
     }
-    private void swap(int targetRow, int targetCol, int emptyRow, int emptyCol) {
-        buttonLayout[emptyRow*WIDTH+emptyCol] = buttonLayout[targetRow*WIDTH+targetCol];
-        buttonLayout[targetRow*WIDTH+targetCol] = EMPTY_BLOCK_INDEX;
+    private void swap(int clicked, int empty) {
+        buttonLayout[empty] = buttonLayout[clicked];
+        buttonLayout[clicked] = EMPTY_BLOCK_INDEX;
 
         numMoves++;
-        emptyBlockLocation = targetRow*WIDTH+targetCol;
+        this.emptyBlockLocation = clicked;
     }
 
     public boolean hasWon() {
@@ -76,16 +75,27 @@ public class SliderModel {
 
     public void shuffle() {
         for (int i = 0; i < 500; i++) shuffleOnce();
-        System.out.println("Everyday I'm shuffling");
-        if (hasWon()) shuffle();
     }
-    private void shuffleOnce() {  // Moves a tile randomly (there is a possiblility of this doing nothing)
+    /** 
+     * Moves a tile randomly (there is a possiblility of this doing nothing)
+     */ 
+    private void shuffleOnce() {  
         int randomDirection = (int)(4 * Math.random());  // 0 to 3
 
         if (randomDirection == 0) slide(emptyBlockLocation - 1);
         else if (randomDirection == 1) slide(emptyBlockLocation + 1);
         else if (randomDirection == 2) slide(emptyBlockLocation - WIDTH);
         else if (randomDirection == 3) slide(emptyBlockLocation + WIDTH);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < HEIGHT; i++) {
+            sb.append('\n');
+            sb.append(Arrays.toString(Arrays.copyOfRange(buttonLayout, WIDTH*i, WIDTH*(i+1))));
+        }
+        return sb.toString();
     }
 
     /* ----- Getters and setters ----- */

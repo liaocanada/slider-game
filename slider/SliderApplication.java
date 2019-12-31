@@ -13,6 +13,7 @@ public class SliderApplication extends Application {
 
     public static final int HEIGHT = 4;
     public static final int WIDTH = 4;
+    public static final int EMPTY_BLOCK_INDEX = 15;
 
     MenuView menuView;
     SliderModel model;
