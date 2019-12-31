@@ -1,3 +1,5 @@
+package slider;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -9,6 +11,9 @@ public class SliderApplication extends Application {
     // TODO Create tasks
     // TODO Comment
 
+    public static final int HEIGHT = 4;
+    public static final int WIDTH = 4;
+
     MenuView menuView;
     SliderModel model;
     SliderView view;
@@ -19,6 +24,7 @@ public class SliderApplication extends Application {
         primaryStage.setTitle("Fifteenth Puzzle");
 
         // Display the Menu first
+        menuView = new MenuView();
         primaryStage.setScene(new Scene(menuView, 300, 275));
         primaryStage.show();
 

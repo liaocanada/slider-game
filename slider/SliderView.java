@@ -1,20 +1,15 @@
+package slider;
+
+import static slider.SliderApplication.HEIGHT;
+import static slider.SliderApplication.WIDTH;
+
 import javafx.event.ActionEvent;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 public class SliderView extends Pane {
-
-    // Constants
-    public static final int HEIGHT = 4;
-    public static final int WIDTH = 4;
 
     // Model which keep track of state of the game
     private SliderModel model;
@@ -39,7 +34,8 @@ public class SliderView extends Pane {
         for (int row = 0; row < HEIGHT; row++) {
             for (int col = 0; col < WIDTH; col++) {
                 sliderButtons[row*WIDTH + col] = new Button();
-                sliderButtons[row*WIDTH + col].setBackground(new Background(new BackgroundImage(image, repeatX, repeatY, position, size)));
+                // sliderButtons[row*WIDTH + col].setBackground(new Background(new BackgroundImage(image, repeatX, repeatY, position, size)));
+                sliderButtons[row*WIDTH + col].setText(String.valueOf(row*WIDTH + col));
             }
         }
 
@@ -65,6 +61,7 @@ public class SliderView extends Pane {
                 root.add(sliderButtons[row*WIDTH + col], col, row);
             }
         }
+        root.getChildren().remove(sliderButtons[WIDTH*HEIGHT-1]);  // Last one should be removed
 
         root.add(movesCounterLabel, 0, HEIGHT);
         root.add(winsCounterLabel, 1, HEIGHT);
@@ -78,14 +75,16 @@ public class SliderView extends Pane {
         Button clicked = (Button) event.getSource();
         int buttonIndex = Integer.parseInt(clicked.getId());
         
-        // if (model.slide(buttonIndex)) {}
         model.slide(buttonIndex);
-        this.updateView();
+        if (model.hasWon()) {
+            System.out.println("Win!");
+        }
+        this.updateGui();
     }
 
     private void handleShuffle(ActionEvent event) {
         model.shuffle();
-        this.updateView();
+        this.updateGui();
     }
 
     private void handleDisplayFullImage(ActionEvent event) {
@@ -94,11 +93,13 @@ public class SliderView extends Pane {
     }
 
     /** Updates the view components based on the state stored by the model */
-    public void updateView() {
+    public void updateGui() {
         // Update the button images
         for (int i = 0; i < sliderButtons.length; i++) {
             int imageIndex = model.getButtonLayout()[i];
-            sliderButtons[i].setBackground(value);  // TODO
+            // sliderButtons[i].setBackground(value);  // TODO image
+
+            sliderButtons[i].setText(String.valueOf(imageIndex));
         }
         
         // Update the counters
