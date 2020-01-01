@@ -1,3 +1,4 @@
 1. Implement checker to see if valid move
 2. Implement multi-slide (it is up to you if that counts as one move or multiple)
 3. Implement images | SliderView: 40, 135
+4. Add undo functionality

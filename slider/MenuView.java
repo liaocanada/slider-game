@@ -1,8 +1,11 @@
 package slider;
 
+import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -10,16 +13,14 @@ import javafx.scene.layout.VBox;
 public class MenuView extends Pane {
 
     // Constants
-    public static final String TITLE_TEXT = "Insert title here";
+    public static final String TITLE_TEXT = "Fifteenth Puzzle";
 
-    public static final String INSTRUCTION_TEXT = "The fifteen puzzle is a game composed of a 4 by 4 grid. "
+    public static final String INSTRUCTION_TEXT = "The fifteenth puzzle is a game composed of a 4 by 4 grid. "
         + "Each piece of the grid is a part of a bigger picture, but with one piece missing. "
         + "The objective of the game is to rearrange the pieces so that the pieces form "
         + "the larger picture. To move a piece, click on a piece adjacent to the empty piece. "
-        + "\nReady? Just click OK and then START!";
+        + "\n\nReady? Just click OK and then Start Game!";
         
-    public static final int NUM_THEMES = 3;
-
     // View components
     private VBox root;
 
@@ -29,27 +30,37 @@ public class MenuView extends Pane {
     private Button startGameButton;
     private Button instructionsButton;
     
-    private RadioButton[] selectionButtons;
+    private ToggleGroup themeButtonsGroup;
+    private RadioButton[] themeButtons;
 
     public MenuView() {
         root = new VBox();
         root.setSpacing(20);
 
         /* ----- Initialize components ----- */
-        title = new Label(TITLE_TEXT);        
-        instructions = new Label(INSTRUCTION_TEXT);   
+        title = new Label(TITLE_TEXT);
+        instructions = new Label("Please select a theme:");   
         
-        selectionButtons = new RadioButton[NUM_THEMES];
-        selectionButtons[0] = new RadioButton("Button1!");
-        selectionButtons[1] = new RadioButton("Button2!");
-        selectionButtons[2] = new RadioButton("Button3!");
-        selectionButtons[0].setSelected(true);
-        radioButtonBox = new HBox(selectionButtons[0], selectionButtons[1], selectionButtons[2]);
+        themeButtons = new RadioButton[3];
+        themeButtons[0] = new RadioButton("Button1!");
+        themeButtons[1] = new RadioButton("Button2!");
+        themeButtons[2] = new RadioButton("Button3!");
+        radioButtonBox = new HBox(themeButtons[0], themeButtons[1], themeButtons[2]);
+        
+        /*----- Configure radio buttons -----*/
+        themeButtonsGroup = new ToggleGroup();
+        for (int i = 0; i < themeButtons.length; i++) {
+            themeButtons[i].setUserData(i);
+            themeButtons[i].setToggleGroup(themeButtonsGroup);
+        }
+        themeButtons[0].setSelected(true);
 
-        startGameButton = new Button("Start Game");
+        /*----- Configure buttons -----*/
+        startGameButton = new Button("Start Game");  // ActionHandler defined in SliderApplication.java
         instructionsButton = new Button("Instructions");
         instructionsButton.setScaleX(0.75);
-        instructionsButton.setScaleX(0.5);
+        instructionsButton.setScaleY(0.5);
+        instructionsButton.setOnAction(this::displayInstructions);
 
         /* ----- Add components ----- */
         root.getChildren().addAll(
@@ -62,14 +73,19 @@ public class MenuView extends Pane {
         this.getChildren().add(root);
     }
 
+    private void displayInstructions(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Instructions");
+        alert.setHeaderText("Instructions");
+        alert.setContentText(INSTRUCTION_TEXT);
+        alert.show();
+    }
+
+    /*----- Getters -----*/
     public Button getStartButton() {
         return startGameButton;
     }
     public int getSelectedTheme() {
-        for (int i = 0; i < selectionButtons.length; i++) {
-            if (selectionButtons[i].isSelected()) return i;
-        }
-        System.out.println("Error: no selected theme");
-        return -1;
+        return (int) themeButtonsGroup.getSelectedToggle().getUserData();
     }
 }

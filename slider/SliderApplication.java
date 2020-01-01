@@ -16,9 +16,12 @@ public class SliderApplication extends Application {
     public static final int WIDTH = 4;
     public static final int EMPTY_BLOCK_INDEX = 15;
 
+    public static final int DEFAULT_WINDOW_WIDTH = 300;
+    public static final int DEFAULT_WINDOW_HEIGHT = 275;
+
     MenuView menuView;
     SliderModel model;
-    SliderView view;
+    SliderView gameView;
 
     @Override
     public void start(Stage primaryStage) {
@@ -27,7 +30,7 @@ public class SliderApplication extends Application {
 
         // Display the Menu first
         menuView = new MenuView();
-        primaryStage.setScene(new Scene(menuView, 300, 275));
+        primaryStage.setScene(new Scene(menuView, DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT));
         primaryStage.show();
 
         menuView.getStartButton().setOnAction(event -> {
@@ -35,10 +38,10 @@ public class SliderApplication extends Application {
            
             // We now have the theme input, now we can start the game
             model = new SliderModel(selectedTheme);
-            view = new SliderView(model);
+            gameView = new SliderView(model);
 
-            // Display the new view
-            primaryStage.setScene(new Scene(view, 300, 275));
+            // Display gameView
+            primaryStage.setScene(new Scene(gameView, DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT));
         });
     }
 
