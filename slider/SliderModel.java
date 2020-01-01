@@ -11,14 +11,16 @@ public class SliderModel {
     private int numWins;
     private int numMoves;
 
-    // Stores the order of the buttons, with buttons 0 to 14 representing
-    //     the correct ordering of the buttons. Button 15 represents the empty space.
+    // Maps button locations to button contents. 
+    // For example if buttonLayout[0] == 5 then the top left button would be 
+    //     containing the number 5 (or the image with ID 5).
     private int[] buttonLayout;
+
+    // Keeps track of the button location of the empty block
     private int emptyBlockLocation = 15;
 
     /** Constructor */
     public SliderModel(int selectedTheme) {
-        // Initialize variables
         this.numWins = 0;
         this.numMoves = 0;
 
@@ -28,7 +30,7 @@ public class SliderModel {
         for (int i = 0; i < buttonLayout.length; i++)
             buttonLayout[i] = i;
 
-        // shuffle();  // To make it start out unshuffled comment this line out
+        // shuffle();  // TODO To make it start out unshuffled comment this line out
     }
 
     /** 
@@ -80,7 +82,8 @@ public class SliderModel {
         this.numMoves = 0;
     }
     /** 
-     * Moves a tile randomly (there is a possiblility of this doing nothing)
+     * Moves a tile randomly 
+     * (there is a possiblility of this doing nothing, if we choose a direction which is out of bounds)
      */ 
     private void shuffleOnce() {  
         int randomDirection = (int)(4 * Math.random());  // 0 to 3

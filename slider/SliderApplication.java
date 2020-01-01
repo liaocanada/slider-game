@@ -7,6 +7,8 @@ import javafx.stage.Stage;
 public class SliderApplication extends Application {
 
     // TODO Look into CSS https://docs.oracle.com/javase/8/javafx/get-started-tutorial/css.htm
+    // TODO Fix radio buttons
+    // TODO make window resizeable
     // TODO Create tasks
     // TODO Comment
 

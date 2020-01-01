@@ -38,7 +38,6 @@ public class SliderView extends Pane {
         for (int row = 0; row < HEIGHT; row++) {
             for (int col = 0; col < WIDTH; col++) {
                 sliderButtons[row*WIDTH + col] = new Button();
-                // sliderButtons[row*WIDTH + col].setBackground(new Background(new BackgroundImage(image, repeatX, repeatY, position, size)));
                 sliderButtons[row*WIDTH + col].setText(String.valueOf(row*WIDTH + col));
             }
         }
@@ -101,7 +100,7 @@ public class SliderView extends Pane {
             if (result.isPresent() && result.get() == ButtonType.OK){
                 model.shuffle();
             }
-            /* ----- Something else: exit ----- */
+            /* ----- User clicked something else: exit ----- */
             else System.exit(0);
         }
         this.updateGui();
@@ -134,7 +133,6 @@ public class SliderView extends Pane {
         // Update the button images
         for (int i = 0; i < sliderButtons.length; i++) {
             int imageIndex = model.getButtonLayout()[i];
-            // sliderButtons[i].setBackground(value);  // TODO image
             sliderButtons[i].setText(String.valueOf(imageIndex));
 
             // Update visibility of buttons
