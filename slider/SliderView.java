@@ -4,8 +4,11 @@ import static slider.SliderApplication.HEIGHT;
 import static slider.SliderApplication.WIDTH;
 import static slider.SliderApplication.EMPTY_BLOCK_INDEX;
 
+import java.util.Optional;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -78,16 +81,47 @@ public class SliderView extends Pane {
         
         model.slide(buttonIndex);
         if (model.hasWon()) {
-            System.out.println("Winner!");  // TODO handle win
+            /* ----- Add a win and display all buttons----- */
             model.incrementWin();
-            model.shuffle();
+            this.updateGui();
+            for (Button b : sliderButtons) b.setVisible(true);
+
+            /* ----- Display alert ----- */
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Winner!");
+            alert.setHeaderText("Winner!");
+            int numWins = model.getNumWins();
+            alert.setContentText("You won with " + model.getNumMoves() + " moves! " + 
+                "\nYou have accumulated " + numWins + (numWins == 1 ? " win! " : " wins! ") + 
+                "\nPress OK to start a new game, or close this alert to exit.");
+
+            Optional<ButtonType> result = alert.showAndWait();
+
+            /* ----- User clicked OK: start new game ----- */
+            if (result.isPresent() && result.get() == ButtonType.OK){
+                model.shuffle();
+            }
+            /* ----- Something else: exit ----- */
+            else System.exit(0);
         }
         this.updateGui();
     }
 
     private void handleShuffle(ActionEvent event) {
-        model.shuffle();
-        this.updateGui();
+        /* ----- Display confirmation alert ----- */
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Are you sure?");
+        alert.setHeaderText("Are you sure?");
+        alert.setContentText("You are about to perform a shuffle. This will randomly reset " + 
+            "the slider game and set your moves to 0. Select OK to confirm...");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        /* ----- User clicked OK: shuffle ----- */
+        if (result.isPresent() && result.get() == ButtonType.OK){
+            model.shuffle();
+            this.updateGui();
+        }
     }
 
     private void handleDisplayFullImage(ActionEvent event) {

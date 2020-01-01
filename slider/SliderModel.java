@@ -28,7 +28,7 @@ public class SliderModel {
         for (int i = 0; i < buttonLayout.length; i++)
             buttonLayout[i] = i;
 
-        shuffle();  // To make it start out unshuffled comment this line out
+        // shuffle();  // To make it start out unshuffled comment this line out
     }
 
     /** 
@@ -38,6 +38,8 @@ public class SliderModel {
     public boolean slide(int targetButtonIndex) {
         if (targetButtonIndex < 0 || targetButtonIndex >= WIDTH*HEIGHT) return false;
         if (buttonLayout[targetButtonIndex] == EMPTY_BLOCK_INDEX) return false;
+
+        // System.out.println("Sliding button " + targetButtonIndex + " with value " + buttonLayout[targetButtonIndex]);
 
         // Determine coordinates of the target button and of the empty button
         int targetRow = targetButtonIndex / WIDTH;
