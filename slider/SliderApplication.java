@@ -6,7 +6,6 @@ import javafx.stage.Stage;
 
 public class SliderApplication extends Application {
 
-    // TODO Edit this file
     // TODO Look into CSS https://docs.oracle.com/javase/8/javafx/get-started-tutorial/css.htm
     // TODO Create tasks
     // TODO Comment

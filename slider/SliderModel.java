@@ -28,7 +28,7 @@ public class SliderModel {
         for (int i = 0; i < buttonLayout.length; i++)
             buttonLayout[i] = i;
 
-        // shuffle();  TODO
+        shuffle();  // To make it start out unshuffled comment this line out
     }
 
     /** 
@@ -75,6 +75,7 @@ public class SliderModel {
 
     public void shuffle() {
         for (int i = 0; i < 500; i++) shuffleOnce();
+        this.numMoves = 0;
     }
     /** 
      * Moves a tile randomly (there is a possiblility of this doing nothing)
@@ -90,10 +91,11 @@ public class SliderModel {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder("\n");
         for (int i = 0; i < HEIGHT; i++) {
+            int[] thisRow = Arrays.copyOfRange(buttonLayout, WIDTH*i, WIDTH*(i+1));
+            sb.append(Arrays.toString(thisRow));
             sb.append('\n');
-            sb.append(Arrays.toString(Arrays.copyOfRange(buttonLayout, WIDTH*i, WIDTH*(i+1))));
         }
         return sb.toString();
     }
@@ -102,10 +104,13 @@ public class SliderModel {
     public int getNumWins() {
         return numWins;
     }
+    public void incrementWin() {
+        this.numWins++;
+    }
     public int getNumMoves() {
         return numMoves;
     }
-    public int[] getButtonLayout() {  // Returns a copy of buttonLayout
+    public int[] getButtonLayout() {  // Returns a copy of buttonLayout for immutability
         return Arrays.copyOf(buttonLayout, buttonLayout.length);
     }
 }

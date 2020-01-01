@@ -78,9 +78,10 @@ public class SliderView extends Pane {
         
         model.slide(buttonIndex);
         if (model.hasWon()) {
-            System.out.println("Win!");  // TODO handle win
+            System.out.println("Winner!");  // TODO handle win
+            model.incrementWin();
+            model.shuffle();
         }
-        System.out.println("Slider button " + buttonIndex + " clicked, result: " + model);
         this.updateGui();
     }
 
@@ -111,7 +112,7 @@ public class SliderView extends Pane {
         
         // Update the counters
         movesCounterLabel.setText(this.formatMovesLabel(model.getNumMoves()));
-        movesCounterLabel.setText(this.formatWinsLabel(model.getNumWins()));
+        winsCounterLabel.setText(this.formatWinsLabel(model.getNumWins()));
     }
     private String formatMovesLabel(int moves) {
         return "Moves: " + moves;
