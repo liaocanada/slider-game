@@ -2,3 +2,6 @@
 2. Implement multi-slide (it is up to you if that counts as one move or multiple)
 3. Implement images | SliderView: 40, 135
 4. Add undo functionality
+5. Hover button to display image
+6. Arrow keys
+7. 3x3 or 5x5
