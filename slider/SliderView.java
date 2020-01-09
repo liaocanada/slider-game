@@ -27,27 +27,37 @@ public class SliderView extends Pane {
 	// Model which keep track of state of the game
 	private SliderModel model;
 
+	private Theme selectedTheme;
+
 	// View components
 	private VBox root;
 
 	private GridPane grid;
 	private Button[] sliderButtons;
+	private ImageView[] images;
 	
 	private ControlsView controlsBar;
 
-	public SliderView(SliderModel model, int selectedTheme) {
+
+	public SliderView(SliderModel model, Theme selectedTheme) {
 		this.model = model;
-		
+		this.selectedTheme = selectedTheme;
+
 		/* ----- Initialize components ----- */
 		root = new VBox();
 		
 		grid = new GridPane();
 		sliderButtons = new Button[HEIGHT*WIDTH];
-		
+		images = new ImageView[HEIGHT*WIDTH];
+
 		for (int row = 0; row < HEIGHT; row++) {
 			for (int col = 0; col < WIDTH; col++) {
 				sliderButtons[row*WIDTH + col] = new Button();
-				// sliderButtons[row*WIDTH + col].setText(String.valueOf(row*WIDTH + col));
+
+				if (selectedTheme != Theme.PLAIN_NUMBERS) {
+					String pieceUrl = String.format("slider/images/pieces-%d/piece%d%d.jpeg", selectedTheme.ordinal(), row, col); 
+					images[row*WIDTH + col] = new ImageView(new Image(pieceUrl, 94, 94, true, true));
+				}
 			}
 		}
 		
@@ -145,9 +155,12 @@ public class SliderView extends Pane {
 		// Update the button images
 		for (int i = 0; i < sliderButtons.length; i++) {
 			int imageIndex = model.getButtonLayout()[i];
-			// sliderButtons[i].setBackground(value);  // TODO image
-			sliderButtons[i].setText(String.valueOf(imageIndex));
-
+			if (selectedTheme == Theme.PLAIN_NUMBERS)
+				sliderButtons[i].setText(String.valueOf(imageIndex));
+			else {
+				sliderButtons[i].setGraphic(images[imageIndex]);
+			}
+			
 			// Update visibility of buttons
 			if (imageIndex == EMPTY_BLOCK_INDEX)
 				sliderButtons[i].setVisible(false);

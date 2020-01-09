@@ -35,7 +35,7 @@ public class SliderApplication extends Application {
 
         // Switch view when start button is clicked
         menuView.getStartButton().setOnAction(event -> {
-            int selectedTheme = menuView.getSelectedTheme();
+            Theme selectedTheme = menuView.getSelectedTheme();
            
             // We now have the theme input, now we can start the game
             model = new SliderModel();

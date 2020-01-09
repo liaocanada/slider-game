@@ -50,10 +50,12 @@ public class MenuView extends Pane {
         /*----- Configure radio buttons -----*/
         themeButtonsGroup = new ToggleGroup();
         for (int i = 0; i < themeButtons.length; i++) {
-            themeButtons[i].setUserData(i);
             themeButtons[i].setToggleGroup(themeButtonsGroup);
         }
         themeButtons[0].setSelected(true);
+        themeButtons[0].setUserData(Theme.PLAIN_NUMBERS);
+        themeButtons[1].setUserData(Theme.BEE_MOVIE);
+        themeButtons[2].setUserData(Theme.MR_BEAN); 
 
         /*----- Configure buttons -----*/
         startGameButton = new Button("Start Game");  // ActionHandler defined in SliderApplication.java
@@ -85,7 +87,7 @@ public class MenuView extends Pane {
     public Button getStartButton() {
         return startGameButton;
     }
-    public int getSelectedTheme() {
-        return (int) themeButtonsGroup.getSelectedToggle().getUserData();
+    public Theme getSelectedTheme() {
+        return (Theme) themeButtonsGroup.getSelectedToggle().getUserData();
     }
 }

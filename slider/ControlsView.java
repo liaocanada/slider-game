@@ -35,7 +35,7 @@ public class ControlsView extends BorderPane {
 	private Tooltip fullImageTooltip;
 	private Image fullImage;
 
-    public ControlsView(SliderModel model, int selectedTheme) {
+    public ControlsView(SliderModel model, Theme selectedTheme) {
         this.model = model;
 
 		/* ----- Initialize components ----- */
@@ -45,7 +45,7 @@ public class ControlsView extends BorderPane {
         
         buttons = new HBox();
 		shuffleButton = new Button("Reset & Shuffle");
-		String imageUrl = "slider/images/full-" + selectedTheme + ".png";
+		String imageUrl = "slider/images/full-" + selectedTheme.ordinal() + ".png";
 		displayFullImageButton = new Button("Hover to see full image");
 		fullImageTooltip = new Tooltip();
 		fullImage = new Image(imageUrl, 500, 500, true, true);
