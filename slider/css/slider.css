@@ -1,0 +1,16 @@
+.slider-button {
+    -fx-background-color: rgba(0,0,0,0.08);
+    -fx-text-fill: #242d35;
+    -fx-font-size: 14px;
+    -fx-padding: 1px;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+}
+
+.shuffle-button {
+    
+}
+
+.display-image-button {
+
+}

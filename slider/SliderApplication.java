@@ -13,8 +13,8 @@ public class SliderApplication extends Application {
     public static final int WIDTH = 4;
     public static final int EMPTY_BLOCK_INDEX = 15;
 
-    public static final int DEFAULT_WINDOW_WIDTH = 300;
-    public static final int DEFAULT_WINDOW_HEIGHT = 275;
+    public static final int WINDOW_WIDTH = 380;
+    public static final int WINDOW_HEIGHT = 450;
 
     MenuView menuView;
     SliderModel model;
@@ -25,11 +25,15 @@ public class SliderApplication extends Application {
         // The primaryStage is our main Window for the GUI
         primaryStage.setTitle("Fifteenth Puzzle");
 
-        // Display the Menu first
+        // Setup the window and display the menu
         menuView = new MenuView();
-        primaryStage.setScene(new Scene(menuView, DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT));
+        Scene menuScene = new Scene(menuView, WINDOW_WIDTH, WINDOW_HEIGHT);
+        menuScene.getStylesheets().add("slider/css/menu.css");
+
+        primaryStage.setScene(menuScene);
         primaryStage.show();
 
+        // Switch view when start button is clicked
         menuView.getStartButton().setOnAction(event -> {
             int selectedTheme = menuView.getSelectedTheme();
            
@@ -37,8 +41,10 @@ public class SliderApplication extends Application {
             model = new SliderModel(selectedTheme);
             gameView = new SliderView(model);
 
-            // Display gameView
-            primaryStage.setScene(new Scene(gameView, DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT));
+            // Display the new view
+            Scene sliderScene = new Scene(gameView, WINDOW_WIDTH, WINDOW_HEIGHT);
+            sliderScene.getStylesheets().add("slider/css/slider.css");
+            primaryStage.setScene(sliderScene);
         });
     }
 
