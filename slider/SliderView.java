@@ -30,18 +30,12 @@ public class SliderView extends Pane {
 	// View components
 	private VBox root;
 
-	private HBox controlsBar;
 	private GridPane grid;
-
 	private Button[] sliderButtons;
-	private Label movesCounterLabel;
-	private Label winsCounterLabel;
-	private Button shuffleButton;
-	private Button displayFullImageButton;
-	private Tooltip fullImageTooltip;
-	private Image fullImage;
+	
+	private ControlsView controlsBar;
 
-	public SliderView(SliderModel model) {
+	public SliderView(SliderModel model, int selectedTheme) {
 		this.model = model;
 		
 		/* ----- Initialize components ----- */
@@ -53,19 +47,12 @@ public class SliderView extends Pane {
 		for (int row = 0; row < HEIGHT; row++) {
 			for (int col = 0; col < WIDTH; col++) {
 				sliderButtons[row*WIDTH + col] = new Button();
-				sliderButtons[row*WIDTH + col].setText(String.valueOf(row*WIDTH + col));
+				// sliderButtons[row*WIDTH + col].setText(String.valueOf(row*WIDTH + col));
 			}
 		}
 		
-		controlsBar = new HBox();
+		controlsBar = new ControlsView(model, selectedTheme);
 		
-		movesCounterLabel = new Label(this.formatMovesLabel(0));
-		winsCounterLabel = new Label(this.formatWinsLabel(0));
-		shuffleButton = new Button("Reset & Shuffle");
-		displayFullImageButton = new Button("Hover to see full image");
-		fullImageTooltip = new Tooltip();
-		fullImage = new Image("test.png", 500, 500, true, true);  // TODO
-
 
 		/* ----- Spacing, padding, and CSS tags ----- */
 		for (int row = 0; row < HEIGHT; row++) {
@@ -75,13 +62,7 @@ public class SliderView extends Pane {
 				sliderButtons[row*WIDTH + col].getStyleClass().add("slider-button");
 			}
 		}
-		controlsBar.setSpacing(5);
-		controlsBar.setPadding(new Insets(30, 0, 10, 10));
-		controlsBar.setAlignment(Pos.CENTER_LEFT);
 
-		shuffleButton.getStyleClass().add("shuffle-button");
-		displayFullImageButton.getStyleClass().add("display-image-button");
-		
 
 		/* ----- Attach EventListeners to all Buttons ----- */
 		for (int row = 0; row < HEIGHT; row++) {
@@ -91,11 +72,7 @@ public class SliderView extends Pane {
 			}
 		}
 
-		shuffleButton.setOnAction(this::handleShuffle);
-		// displayFullImageButton.setOnAction(this::handleDisplayFullImage);
-		fullImageTooltip.setGraphic(new ImageView(fullImage));
-		displayFullImageButton.setTooltip(fullImageTooltip);
-		// displayFullImageButton.setTooltip(new Tooltip("Tooltip"));
+		controlsBar.getShuffleButton().setOnAction(this::handleShuffle);
 
 
 		/* ----- Add components ----- */
@@ -104,14 +81,13 @@ public class SliderView extends Pane {
 				grid.add(sliderButtons[row*WIDTH + col], col, row);
 			}
 		}
-		sliderButtons[WIDTH*HEIGHT-1].setVisible(false);  // Last one should be hidden
-
-		controlsBar.getChildren().addAll(movesCounterLabel, winsCounterLabel, shuffleButton, displayFullImageButton);
 
 		root.getChildren().add(grid);
 		root.getChildren().add(controlsBar);
 		
 		this.getChildren().add(root);
+
+		this.updateGui();
 	}
 
 	private void handleSliderButtonClicked(ActionEvent event) {
@@ -143,11 +119,11 @@ public class SliderView extends Pane {
             /* ----- User clicked something else: exit ----- */
             else System.exit(0);
 		}
-		System.out.println("Slider button " + buttonIndex + " clicked, result: " + model);
+		// System.out.println("Slider button " + buttonIndex + " clicked, result: " + model);
 		this.updateGui();
 	}
 
-    private void handleShuffle(ActionEvent event) {
+	private void handleShuffle(ActionEvent event) {
         /* ----- Display confirmation alert ----- */
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Are you sure?");
@@ -164,11 +140,6 @@ public class SliderView extends Pane {
         }
     }
 
-	private void handleDisplayFullImage(ActionEvent event) {
-		// TODO implement Dialog stuff or display separate window
-		System.out.println("TODO implement");
-	}
-
 	/** Updates the view components based on the state stored by the model */
 	public void updateGui() {
 		// Update the button images
@@ -183,15 +154,8 @@ public class SliderView extends Pane {
 			else
 				sliderButtons[i].setVisible(true);
 		}
-		
+
 		// Update the counters
-		movesCounterLabel.setText(this.formatMovesLabel(model.getNumMoves()));
-		winsCounterLabel.setText(this.formatWinsLabel(model.getNumWins()));
-	}
-	private String formatMovesLabel(int moves) {
-		return "Moves: " + moves;
-	}
-	private String formatWinsLabel(int wins) {
-		return "Wins: " + wins;
+		controlsBar.updateGui();
 	}
 }

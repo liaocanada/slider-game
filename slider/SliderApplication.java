@@ -38,8 +38,8 @@ public class SliderApplication extends Application {
             int selectedTheme = menuView.getSelectedTheme();
            
             // We now have the theme input, now we can start the game
-            model = new SliderModel(selectedTheme);
-            gameView = new SliderView(model);
+            model = new SliderModel();
+            gameView = new SliderView(model, selectedTheme);
 
             // Display the new view
             Scene sliderScene = new Scene(gameView, WINDOW_WIDTH, WINDOW_HEIGHT);

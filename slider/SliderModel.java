@@ -20,7 +20,7 @@ public class SliderModel {
     private int emptyBlockLocation = 15;
 
     /** Constructor */
-    public SliderModel(int selectedTheme) {
+    public SliderModel() {
         this.numWins = 0;
         this.numMoves = 0;
 
