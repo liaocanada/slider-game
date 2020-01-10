@@ -1,6 +1,7 @@
 package slider;
 
 import java.util.Optional;
+
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.geometry.Insets;
@@ -47,7 +48,7 @@ public class ControlsView extends BorderPane {
 		String imageUrl = "slider/images/full-" + selectedTheme.ordinal() + ".png";
 		displayFullImageButton = new Button("Hover for full image");
 		fullImageTooltip = new Tooltip();
-		fullImage = new Image(imageUrl, 500, 500, true, true);
+		fullImage = new Image(imageUrl, 400, 400, true, true);
 
 
 		/* ----- Spacing, padding, and CSS tags ----- */
