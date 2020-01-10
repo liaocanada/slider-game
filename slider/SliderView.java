@@ -26,7 +26,7 @@ import javafx.scene.image.ImageView;
 
 public class SliderView extends BorderPane {
 
-	// Model which keep track of state of the game
+	// Model which keeps track of state of the game
 	private SliderModel model;
 
 	private Theme selectedTheme;
@@ -58,7 +58,6 @@ public class SliderView extends BorderPane {
 				}
 			}
 		}
-		
 		controlsBar = new ControlsView(model, selectedTheme);
 		
 
@@ -74,6 +73,7 @@ public class SliderView extends BorderPane {
 		grid.setAlignment(Pos.CENTER);
 		grid.setPadding(new Insets(10, 0, 10, 0));
 
+
 		/* ----- Attach EventListeners to all Buttons ----- */
 		for (int row = 0; row < HEIGHT; row++) {
 			for (int col = 0; col < WIDTH; col++) {
@@ -81,7 +81,6 @@ public class SliderView extends BorderPane {
 				sliderButtons[row*WIDTH + col].setOnAction(this::handleSliderButtonClicked);
 			}
 		}
-
 		controlsBar.getShuffleButton().setOnAction(this::handleShuffle);
 
 
@@ -102,6 +101,7 @@ public class SliderView extends BorderPane {
 		int buttonIndex = Integer.parseInt(clicked.getId());
 		
 		model.slide(buttonIndex);
+		
 		if (model.hasWon()) {
             /* ----- Add a win and display all buttons----- */
             model.incrementWin();

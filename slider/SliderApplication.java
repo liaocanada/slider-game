@@ -5,7 +5,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class SliderApplication extends Application {
-
+    // Constants
     public static final int HEIGHT = 4;
     public static final int WIDTH = 4;
     public static final int EMPTY_BLOCK_INDEX = 15;
@@ -13,13 +13,14 @@ public class SliderApplication extends Application {
     public static final int WINDOW_WIDTH = 400;
     public static final int WINDOW_HEIGHT = 470;
 
+    // Views and Models
     MenuView menuView;
     SliderModel model;
     SliderView gameView;
 
     @Override
     public void start(Stage primaryStage) {
-        // The primaryStage is our main Window for the GUI
+        // The primaryStage is our window for the GUI
         primaryStage.setTitle("Fifteen Puzzle");
 
         // Setup the window and display the menu
@@ -27,8 +28,8 @@ public class SliderApplication extends Application {
         Scene menuScene = new Scene(menuView, WINDOW_WIDTH, WINDOW_HEIGHT);
         menuScene.getStylesheets().add("slider/css/main.css");
 
+        // primaryStage.setResizable(false);  // uncomment if you want
         primaryStage.setScene(menuScene);
-        // primaryStage.setResizable(false);
         primaryStage.show();
 
         // Switch view when start button is clicked

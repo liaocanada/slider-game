@@ -30,7 +30,7 @@ public class SliderModel {
         for (int i = 0; i < buttonLayout.length; i++)
             buttonLayout[i] = i;
 
-        shuffle();  // TODO To make it start out unshuffled comment this line out
+        shuffle();  // To make it start out unshuffled comment this line out
     }
 
     /** 

@@ -17,9 +17,11 @@ public class MenuView extends VBox {
     public static final String TITLE_TEXT = "Fifteen Slider Puzzle";
 
     public static final String INSTRUCTION_TEXT = "The fifteen puzzle is a game composed of a 4 by 4 grid. "
-        + "Each piece of the grid is a part of a bigger picture, but with one piece missing. "
-        + "The objective of the game is to rearrange the pieces so that the pieces form "
-        + "the larger picture. To move a piece, click on a piece adjacent to the empty piece. "
+        + "Each piece of the grid is a part of a bigger picture, but there is one piece missing. "
+        + "The objective of the puzzle is to rearrange the pieces so that the pieces form "
+        + "the larger picture. You may only move pieces adjacent to the empty piece. "
+        + "\n\nTo see the larger picture, hold your cursor over the \"Hover for full image\" button."
+        + "\nThere are three different themes you can try, with the basic theme being the easiest."
         + "\n\nReady? Just click OK and then Start Game!";
         
     // View components
@@ -65,7 +67,6 @@ public class MenuView extends VBox {
         startGameButton.getStyleClass().add("btn-success");
         instructionsButton.getStyleClass().add("btn-info");
         title.getStyleClass().add("heading");
-        // instructions.getStyleClass().add("heading");
 
         /*----- Spacing -----*/
         radioButtonBox.setSpacing(10);

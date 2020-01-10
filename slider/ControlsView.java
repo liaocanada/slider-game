@@ -22,8 +22,10 @@ import javafx.scene.image.ImageView;
 
 public class ControlsView extends BorderPane {
 
+	// Model which keeps track of state of the game
     private SliderModel model;
 
+	// View components
     private HBox counters;
     private HBox buttons;
 
@@ -34,6 +36,7 @@ public class ControlsView extends BorderPane {
 	private Button displayFullImageButton;
 	private Tooltip fullImageTooltip;
 	private Image fullImage;
+
 
     public ControlsView(SliderModel model, Theme selectedTheme) {
         this.model = model;
@@ -62,7 +65,6 @@ public class ControlsView extends BorderPane {
         
         
 		/* ----- Attach on-hover tooltip ----- */
-		// displayFullImageButton.setOnAction(this::handleDisplayFullImage);
 		fullImageTooltip.setGraphic(new ImageView(fullImage));
 		displayFullImageButton.setTooltip(fullImageTooltip);
 
