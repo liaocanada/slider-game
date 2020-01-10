@@ -10,8 +10,8 @@ public class SliderApplication extends Application {
     public static final int WIDTH = 4;
     public static final int EMPTY_BLOCK_INDEX = 15;
 
-    public static final int WINDOW_WIDTH = 385;
-    public static final int WINDOW_HEIGHT = 450;
+    public static final int WINDOW_WIDTH = 400;
+    public static final int WINDOW_HEIGHT = 470;
 
     MenuView menuView;
     SliderModel model;
@@ -20,12 +20,12 @@ public class SliderApplication extends Application {
     @Override
     public void start(Stage primaryStage) {
         // The primaryStage is our main Window for the GUI
-        primaryStage.setTitle("Fifteenth Puzzle");
+        primaryStage.setTitle("Fifteen Puzzle");
 
         // Setup the window and display the menu
         menuView = new MenuView();
         Scene menuScene = new Scene(menuView, WINDOW_WIDTH, WINDOW_HEIGHT);
-        menuScene.getStylesheets().add("slider/css/menu.css");
+        menuScene.getStylesheets().add("slider/css/main.css");
 
         primaryStage.setScene(menuScene);
         // primaryStage.setResizable(false);
@@ -41,7 +41,7 @@ public class SliderApplication extends Application {
 
             // Display the new view
             Scene sliderScene = new Scene(gameView, WINDOW_WIDTH, WINDOW_HEIGHT);
-            sliderScene.getStylesheets().add("slider/css/slider.css");
+            sliderScene.getStylesheets().add("slider/css/main.css");
             primaryStage.setScene(sliderScene);
         });
     }

@@ -1,0 +1,80 @@
+.root {
+    -fx-background-color: #f8fddae5;
+    -fx-font-family: Tahoma, Geneva, sans-serif;
+}
+
+.slider-button {
+    -fx-background-color: rgb(200, 200, 200);
+    -fx-text-fill: #242d35;
+    -fx-font-size: 14px;
+    -fx-padding: 1px;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+}
+
+.heading {
+    -fx-font-size: 30px;
+    -fx-font-weight: 500;
+    -fx-padding: 20px 0 10px 0;
+}
+
+.subheading {
+    -fx-font-size: 20px;
+    -fx-font-weight: 500;
+    -fx-padding: 20px 0 10px 0;
+}
+
+.btn-default {
+    -fx-text-fill: #333333;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cccccc;
+}
+.btn-default:hover {
+    -fx-text-fill: #333333;
+    -fx-background-color: #ebebeb;
+    -fx-border-color: #adadad;
+}
+
+.btn-primary {
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #428bca;
+    -fx-border-color: #357ebd;
+}
+.btn-primary:hover {
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #3276b1;
+    -fx-border-color: #285e8e;
+}
+
+.btn-success {
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #5cb85c;
+    -fx-border-color: #4cae4c;
+}
+.btn-success:hover {
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #47a447;
+    -fx-border-color: #398439;
+}
+
+.btn-info {
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #5bc0de;
+    -fx-border-color: #46b8da;
+}
+.btn-info:hover {
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #39b3d7;
+    -fx-border-color: #269abc;
+}
+
+.btn-warning {
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #f0ad4e;
+    -fx-border-color: #eea236;
+}
+.btn-warning:hover {
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #ed9c28;
+    -fx-border-color: #d58512;
+}

@@ -8,8 +8,8 @@ import java.util.Optional;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -72,6 +72,7 @@ public class SliderView extends BorderPane {
 		}
 		BorderPane.setAlignment(grid, Pos.TOP_CENTER);
 		grid.setAlignment(Pos.CENTER);
+		grid.setPadding(new Insets(10, 0, 10, 0));
 
 		/* ----- Attach EventListeners to all Buttons ----- */
 		for (int row = 0; row < HEIGHT; row++) {

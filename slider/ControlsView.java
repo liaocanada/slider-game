@@ -22,7 +22,6 @@ import javafx.scene.image.ImageView;
 public class ControlsView extends BorderPane {
 
     private SliderModel model;
-    private SliderView sliderView;
 
     private HBox counters;
     private HBox buttons;
@@ -46,19 +45,19 @@ public class ControlsView extends BorderPane {
         buttons = new HBox();
 		shuffleButton = new Button("Reset & Shuffle");
 		String imageUrl = "slider/images/full-" + selectedTheme.ordinal() + ".png";
-		displayFullImageButton = new Button("Hover to see full image");
+		displayFullImageButton = new Button("Hover for full image");
 		fullImageTooltip = new Tooltip();
 		fullImage = new Image(imageUrl, 500, 500, true, true);
 
 
 		/* ----- Spacing, padding, and CSS tags ----- */
-		this.setPadding(new Insets(30, 10, 15, 10));
+		this.setPadding(new Insets(20, 10, 15, 10));
         counters.setAlignment(Pos.CENTER_LEFT);
         counters.setSpacing(5);
         buttons.setSpacing(5);
 
-		shuffleButton.getStyleClass().add("shuffle-button");
-		displayFullImageButton.getStyleClass().add("display-image-button");
+		shuffleButton.getStyleClass().add("btn-warning");
+		displayFullImageButton.getStyleClass().add("btn-info");
         
         
 		/* ----- Attach on-hover tooltip ----- */

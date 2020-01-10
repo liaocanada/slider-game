@@ -14,9 +14,9 @@ import javafx.geometry.Pos;
 public class MenuView extends VBox {
 
     // Constants
-    public static final String TITLE_TEXT = "Fifteenth Puzzle";
+    public static final String TITLE_TEXT = "Fifteen Slider Puzzle";
 
-    public static final String INSTRUCTION_TEXT = "The fifteenth puzzle is a game composed of a 4 by 4 grid. "
+    public static final String INSTRUCTION_TEXT = "The fifteen puzzle is a game composed of a 4 by 4 grid. "
         + "Each piece of the grid is a part of a bigger picture, but with one piece missing. "
         + "The objective of the game is to rearrange the pieces so that the pieces form "
         + "the larger picture. To move a piece, click on a piece adjacent to the empty piece. "
@@ -60,6 +60,12 @@ public class MenuView extends VBox {
         startGameButton.setPrefSize(200, 40);
         instructionsButton.setPrefSize(100, 25);
         instructionsButton.setOnAction(this::displayInstructions);
+        
+        /*----- Add CSS tags -----*/
+        startGameButton.getStyleClass().add("btn-success");
+        instructionsButton.getStyleClass().add("btn-info");
+        title.getStyleClass().add("heading");
+        // instructions.getStyleClass().add("heading");
 
         /*----- Spacing -----*/
         radioButtonBox.setSpacing(10);
