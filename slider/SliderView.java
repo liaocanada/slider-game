@@ -5,6 +5,7 @@ import static slider.SliderApplication.WIDTH;
 import static slider.SliderApplication.EMPTY_BLOCK_INDEX;
 
 import java.util.Optional;
+
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.geometry.Insets;
@@ -124,7 +125,7 @@ public class SliderView extends BorderPane {
             /* ----- User clicked something else: exit ----- */
             else System.exit(0);
 		}
-		// System.out.println("Slider button " + buttonIndex + " clicked, result: " + model);
+
 		this.updateGui();
 	}
 
@@ -151,7 +152,7 @@ public class SliderView extends BorderPane {
 		for (int i = 0; i < sliderButtons.length; i++) {
 			int imageIndex = model.getButtonLayout()[i];
 			if (selectedTheme == Theme.PLAIN_NUMBERS)
-				sliderButtons[i].setText(String.valueOf(imageIndex));
+				sliderButtons[i].setText(String.valueOf(imageIndex + 1));  // 0 to 14 -> 1 to 15
 			else {
 				sliderButtons[i].setGraphic(images[imageIndex]);
 			}
