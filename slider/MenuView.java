@@ -9,8 +9,9 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.geometry.Pos;
 
-public class MenuView extends Pane {
+public class MenuView extends VBox {
 
     // Constants
     public static final String TITLE_TEXT = "Fifteenth Puzzle";
@@ -22,8 +23,6 @@ public class MenuView extends Pane {
         + "\n\nReady? Just click OK and then Start Game!";
         
     // View components
-    private VBox root;
-
     private Label title;
     private Label instructions;
     private HBox radioButtonBox;
@@ -34,19 +33,19 @@ public class MenuView extends Pane {
     private RadioButton[] themeButtons;
 
     public MenuView() {
-        root = new VBox();
-        root.setSpacing(20);
-
         /* ----- Initialize components ----- */
         title = new Label(TITLE_TEXT);
         instructions = new Label("Please select a theme:");   
         
         themeButtons = new RadioButton[3];
-        themeButtons[0] = new RadioButton("Button1!");
-        themeButtons[1] = new RadioButton("Button2!");
-        themeButtons[2] = new RadioButton("Button3!");
+        themeButtons[0] = new RadioButton("Basic theme");
+        themeButtons[1] = new RadioButton("Bee Movie theme");
+        themeButtons[2] = new RadioButton("Mr Bean theme");
         radioButtonBox = new HBox(themeButtons[0], themeButtons[1], themeButtons[2]);
         
+        startGameButton = new Button("Start Game");  // ActionHandler defined in SliderApplication.java
+        instructionsButton = new Button("Instructions");
+
         /*----- Configure radio buttons -----*/
         themeButtonsGroup = new ToggleGroup();
         for (int i = 0; i < themeButtons.length; i++) {
@@ -58,21 +57,24 @@ public class MenuView extends Pane {
         themeButtons[2].setUserData(Theme.MR_BEAN); 
 
         /*----- Configure buttons -----*/
-        startGameButton = new Button("Start Game");  // ActionHandler defined in SliderApplication.java
-        instructionsButton = new Button("Instructions");
-        instructionsButton.setScaleX(0.75);
-        instructionsButton.setScaleY(0.5);
+        startGameButton.setPrefSize(200, 40);
+        instructionsButton.setPrefSize(100, 25);
         instructionsButton.setOnAction(this::displayInstructions);
 
+        /*----- Spacing -----*/
+        radioButtonBox.setSpacing(10);
+        radioButtonBox.setAlignment(Pos.CENTER);
+        this.setSpacing(20);
+        this.setAlignment(Pos.CENTER);
+
         /* ----- Add components ----- */
-        root.getChildren().addAll(
+        this.getChildren().addAll(
             title, 
             instructions, 
             radioButtonBox,
             startGameButton, 
             instructionsButton
         );
-        this.getChildren().add(root);
     }
 
     private void displayInstructions(ActionEvent event) {

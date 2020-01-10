@@ -6,14 +6,11 @@ import javafx.stage.Stage;
 
 public class SliderApplication extends Application {
 
-    // TODO Look into CSS and prettify https://docs.oracle.com/javase/8/javafx/get-started-tutorial/css.htm
-    // TODO make window resizeable
-
     public static final int HEIGHT = 4;
     public static final int WIDTH = 4;
     public static final int EMPTY_BLOCK_INDEX = 15;
 
-    public static final int WINDOW_WIDTH = 380;
+    public static final int WINDOW_WIDTH = 385;
     public static final int WINDOW_HEIGHT = 450;
 
     MenuView menuView;
@@ -31,6 +28,7 @@ public class SliderApplication extends Application {
         menuScene.getStylesheets().add("slider/css/menu.css");
 
         primaryStage.setScene(menuScene);
+        // primaryStage.setResizable(false);
         primaryStage.show();
 
         // Switch view when start button is clicked

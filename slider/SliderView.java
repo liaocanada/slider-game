@@ -14,6 +14,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.Priority;
@@ -22,7 +23,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class SliderView extends Pane {
+public class SliderView extends BorderPane {
 
 	// Model which keep track of state of the game
 	private SliderModel model;
@@ -30,8 +31,6 @@ public class SliderView extends Pane {
 	private Theme selectedTheme;
 
 	// View components
-	private VBox root;
-
 	private GridPane grid;
 	private Button[] sliderButtons;
 	private ImageView[] images;
@@ -44,8 +43,6 @@ public class SliderView extends Pane {
 		this.selectedTheme = selectedTheme;
 
 		/* ----- Initialize components ----- */
-		root = new VBox();
-		
 		grid = new GridPane();
 		sliderButtons = new Button[HEIGHT*WIDTH];
 		images = new ImageView[HEIGHT*WIDTH];
@@ -72,7 +69,8 @@ public class SliderView extends Pane {
 				sliderButtons[row*WIDTH + col].getStyleClass().add("slider-button");
 			}
 		}
-
+		BorderPane.setAlignment(grid, Pos.TOP_CENTER);
+		grid.setAlignment(Pos.CENTER);
 
 		/* ----- Attach EventListeners to all Buttons ----- */
 		for (int row = 0; row < HEIGHT; row++) {
@@ -91,11 +89,8 @@ public class SliderView extends Pane {
 				grid.add(sliderButtons[row*WIDTH + col], col, row);
 			}
 		}
-
-		root.getChildren().add(grid);
-		root.getChildren().add(controlsBar);
-		
-		this.getChildren().add(root);
+		this.setTop(grid);
+		this.setBottom(controlsBar);
 
 		this.updateGui();
 	}

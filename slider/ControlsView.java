@@ -52,7 +52,7 @@ public class ControlsView extends BorderPane {
 
 
 		/* ----- Spacing, padding, and CSS tags ----- */
-		this.setPadding(new Insets(30, 0, 10, 10));
+		this.setPadding(new Insets(30, 10, 15, 10));
         counters.setAlignment(Pos.CENTER_LEFT);
         counters.setSpacing(5);
         buttons.setSpacing(5);
