@@ -1,6 +1,8 @@
 # Fifteen Slider Puzzle
 In this challenge, you are provided with an already-working puzzle game built with JavaFX, which is a framework for building Java desktop applications. This means you can play around with it as you like, to get somewhat familiar with the game as well as the code. However, it isn't perfect... You are given a few additional feature requests (see the Challenges section) to implement which will make the game even better! 
 
+Further instructions for how the puzzle works are provided when you run the program.
+
 ## Getting Started
 You can run this Java program either through an IDE, or through the command line:
 1. Download the files onto your computer
