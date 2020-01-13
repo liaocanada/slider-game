@@ -47,14 +47,33 @@ public class SliderModel {
         int emptyRow = emptyBlockLocation / WIDTH;
         int emptyCol = emptyBlockLocation % WIDTH;
         
-        // Empty block is above/below/left of/right of clicked button
-        if (
-            targetRow - 1 == emptyRow && targetCol == emptyCol ||
-            targetRow + 1 == emptyRow && targetCol == emptyCol ||
-            targetRow == emptyRow && targetCol - 1 == emptyCol ||
-            targetRow == emptyRow && targetCol + 1 == emptyCol
-        ) {
-            swap(targetButtonIndex, emptyBlockLocation);
+        // Empty block is in the same row/column as clicked button (but not the same button)
+        if (targetRow < emptyRow && targetCol == emptyCol) {
+            int colToMove = emptyCol;
+            for (int rowToMove = emptyRow-1; rowToMove >= targetRow; rowToMove--) {
+                swap(rowToMove*WIDTH+colToMove, emptyBlockLocation);
+            }
+            return true;
+        }
+        else if (targetRow > emptyRow && targetCol == emptyCol) {
+            int colToMove = emptyCol;
+            for (int rowToMove = emptyRow+1; rowToMove <= targetRow; rowToMove++) {
+                swap(rowToMove*WIDTH+colToMove, emptyBlockLocation);
+            }
+            return true;
+        }
+        else if (targetCol < emptyCol && targetRow == emptyRow) {
+            int rowToMove = emptyRow;
+            for (int colToMove = emptyCol-1; colToMove >= targetCol; colToMove--) {
+                swap(rowToMove*WIDTH+colToMove, emptyBlockLocation);
+            }
+            return true;
+        }
+        else if (targetCol > emptyCol && targetRow == emptyRow) {
+            int rowToMove = emptyRow;
+            for (int colToMove = emptyCol+1; colToMove <= targetCol; colToMove++) {
+                swap(rowToMove*WIDTH+colToMove, emptyBlockLocation);
+            }
             return true;
         }
 
