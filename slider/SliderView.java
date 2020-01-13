@@ -64,7 +64,7 @@ public class SliderView extends BorderPane {
 		}
 		BorderPane.setAlignment(grid, Pos.TOP_CENTER);
 		grid.setAlignment(Pos.CENTER);
-		grid.setPadding(new Insets(10, 0, 10, 0));
+		grid.setPadding(new Insets(10, 5, 10, 5));
 
 
 		/* ----- Attach EventListeners to all Buttons ----- */

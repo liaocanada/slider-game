@@ -45,14 +45,14 @@ public class ControlsView extends BorderPane {
 
 
 		/* ----- Spacing, padding, and CSS tags ----- */
-		this.setPadding(new Insets(20, 10, 15, 10));
+		this.setPadding(new Insets(10, 10, 10, 10));
         counters.setAlignment(Pos.CENTER_LEFT);
         counters.setSpacing(5);
         buttons.setSpacing(5);
 
 		shuffleButton.getStyleClass().add("btn-warning");
 		displayFullImageButton.getStyleClass().add("btn-info");
-        
+        this.getStyleClass().add("controls");
         
 		/* ----- Attach on-hover tooltip ----- */
 		fullImageTooltip.setGraphic(new ImageView(fullImage));

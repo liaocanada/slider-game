@@ -10,8 +10,8 @@ public class SliderApplication extends Application {
     public static final int WIDTH = 4;
     public static final int EMPTY_BLOCK_INDEX = 15;
 
-    public static final int WINDOW_WIDTH = 400;
-    public static final int WINDOW_HEIGHT = 470;
+    public static final int WINDOW_WIDTH = 410;
+    public static final int WINDOW_HEIGHT = 473;
 
     // Views and Models
     MenuView menuView;
@@ -28,7 +28,7 @@ public class SliderApplication extends Application {
         Scene menuScene = new Scene(menuView, WINDOW_WIDTH, WINDOW_HEIGHT);
         menuScene.getStylesheets().add("slider/css/main.css");
 
-        // primaryStage.setResizable(false);  // uncomment if you want
+        primaryStage.setResizable(false);
         primaryStage.setScene(menuScene);
         primaryStage.show();
 

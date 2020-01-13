@@ -1,15 +1,22 @@
 .root {
-    -fx-background-color: #f8fddae5;
+    /* -fx-background-color: #f1f1f1f1; */
+    -fx-background-image: url("../images/background.jpg");
     -fx-font-family: Tahoma, Geneva, sans-serif;
 }
 
 .slider-button {
     -fx-background-color: rgb(200, 200, 200);
     -fx-text-fill: #242d35;
-    -fx-font-size: 14px;
-    -fx-padding: 1px;
-    -fx-border-insets: 5px;
-    -fx-background-insets: 5px;
+    -fx-font-size: 18px;
+
+    /* Workaround for margin */
+    -fx-padding: 3px;
+    -fx-border-insets: 3px;
+    -fx-background-insets: 3px;
+}
+
+.controls {
+    -fx-background-color: rgb(200, 200, 200);
 }
 
 .heading {
