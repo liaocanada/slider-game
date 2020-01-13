@@ -43,6 +43,27 @@ public class SliderApplication extends Application {
             // Display the new view
             Scene sliderScene = new Scene(gameView, WINDOW_WIDTH, WINDOW_HEIGHT);
             sliderScene.getStylesheets().add("slider/css/main.css");
+            
+            // Add arrow key listeners
+            sliderScene.setOnKeyPressed(keyPress -> {
+                int emptyButtonRow = model.getEmptyBlockLocation() / WIDTH;
+                int emptyButtonCol = model.getEmptyBlockLocation() % WIDTH;
+
+                switch (keyPress.getCode()) {
+                    case UP:   model.slide((emptyButtonRow+1)*WIDTH + emptyButtonCol); break;
+                    case DOWN: model.slide((emptyButtonRow-1)*WIDTH + emptyButtonCol); break;
+                    case LEFT: model.slide(emptyButtonRow*WIDTH + (emptyButtonCol+1)); break;
+                    case RIGHT: model.slide(emptyButtonRow*WIDTH + (emptyButtonCol-1)); break;
+                    default: // Empty
+                }
+                
+                if (model.hasWon()) {
+                    gameView.handleWin();
+                }
+
+                gameView.updateGui();
+            });
+
             primaryStage.setScene(sliderScene);
         });
     }

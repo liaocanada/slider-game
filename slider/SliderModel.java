@@ -116,4 +116,7 @@ public class SliderModel {
     public int[] getButtonLayout() {  // Returns a copy of buttonLayout for immutability
         return Arrays.copyOf(buttonLayout, buttonLayout.length);
     }
+    public int getEmptyBlockLocation() {
+        return emptyBlockLocation;
+    }
 }

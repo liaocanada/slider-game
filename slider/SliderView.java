@@ -96,31 +96,35 @@ public class SliderView extends BorderPane {
 		model.slide(buttonIndex);
 		
 		if (model.hasWon()) {
-            /* ----- Add a win and display all buttons----- */
-            model.incrementWin();
-            this.updateGui();
-            for (Button b : sliderButtons) b.setVisible(true);
-
-            /* ----- Display alert ----- */
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Winner!");
-            alert.setHeaderText("Winner!");
-            int numWins = model.getNumWins();
-            alert.setContentText("You won with " + model.getNumMoves() + " moves! " + 
-                "\nYou have accumulated " + numWins + (numWins == 1 ? " win! " : " wins! ") + 
-                "\nPress OK to start a new game, or close this alert to exit.");
-
-            Optional<ButtonType> result = alert.showAndWait();
-
-            /* ----- User clicked OK: start new game ----- */
-            if (result.isPresent() && result.get() == ButtonType.OK){
-                model.shuffle();
-            }
-            /* ----- User clicked something else: exit ----- */
-            else System.exit(0);
+			this.handleWin();
 		}
 
 		this.updateGui();
+	}
+
+	public void handleWin() {
+		/* ----- Add a win and display all buttons----- */
+		model.incrementWin();
+		this.updateGui();
+		for (Button b : sliderButtons) b.setVisible(true);
+
+		/* ----- Display alert ----- */
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setTitle("Winner!");
+		alert.setHeaderText("Winner!");
+		int numWins = model.getNumWins();
+		alert.setContentText("You won with " + model.getNumMoves() + " moves! " + 
+			"\nYou have accumulated " + numWins + (numWins == 1 ? " win! " : " wins! ") + 
+			"\nPress OK to start a new game, or close this alert to exit.");
+
+		Optional<ButtonType> result = alert.showAndWait();
+
+		/* ----- User clicked OK: start new game ----- */
+		if (result.isPresent() && result.get() == ButtonType.OK){
+			model.shuffle();
+		}
+		/* ----- User clicked something else: exit ----- */
+		else System.exit(0);
 	}
 
 	private void handleShuffle(ActionEvent event) {
