@@ -1,6 +1,7 @@
 package slider;
 
 import java.util.Arrays;
+import java.util.Stack;
 
 import static slider.SliderApplication.HEIGHT;
 import static slider.SliderApplication.WIDTH;
@@ -19,10 +20,14 @@ public class SliderModel {
     // Keeps track of the button location of the empty block
     private int emptyBlockLocation = 15;
 
+    // History for undo functionality. Keeps track of the empty block.
+    private Stack<Integer> movesHistory;
+
     /** Constructor */
     public SliderModel() {
         this.numWins = 0;
         this.numMoves = 0;
+        movesHistory = new Stack<>();
 
         // buttonLayout starts out in sorted order, then shuffles (500 times). 
         //     This ensures the puzzle is solveable.
@@ -54,17 +59,21 @@ public class SliderModel {
             targetRow == emptyRow && targetCol - 1 == emptyCol ||
             targetRow == emptyRow && targetCol + 1 == emptyCol
         ) {
-            swap(targetButtonIndex, emptyBlockLocation);
+            swap(targetButtonIndex, emptyBlockLocation, true);
             return true;
         }
 
         return false;
     }
-    private void swap(int clicked, int empty) {
+    private void swap(int clicked, int empty, boolean countAsMove) {
         buttonLayout[empty] = buttonLayout[clicked];
         buttonLayout[clicked] = EMPTY_BLOCK_INDEX;
 
-        numMoves++;
+        if (countAsMove) {
+            numMoves++;
+            movesHistory.push(empty);
+        }
+
         this.emptyBlockLocation = clicked;
     }
 
@@ -78,6 +87,7 @@ public class SliderModel {
     public void shuffle() {
         for (int i = 0; i < 500; i++) shuffleOnce();
         this.numMoves = 0;
+        this.movesHistory.clear();
     }
     /** 
      * Moves a tile randomly 
@@ -90,6 +100,16 @@ public class SliderModel {
         else if (randomDirection == 1) slide(emptyBlockLocation + 1);
         else if (randomDirection == 2) slide(emptyBlockLocation - WIDTH);
         else if (randomDirection == 3) slide(emptyBlockLocation + WIDTH);
+    }
+
+    public void undo() {
+        if (!canUndo()) return;
+        int lastLocation = this.movesHistory.pop();
+        swap(lastLocation, emptyBlockLocation, false);
+        this.numMoves--;
+    }
+    public boolean canUndo() {
+        return !this.movesHistory.isEmpty();
     }
 
     @Override
