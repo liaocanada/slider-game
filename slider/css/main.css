@@ -41,6 +41,10 @@
     -fx-background-color: #ebebeb;
     -fx-border-color: #adadad;
 }
+.btn-default:disabled {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cccccc;
+  }
 
 .btn-primary {
     -fx-text-fill: #ffffff;

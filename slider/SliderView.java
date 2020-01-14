@@ -74,8 +74,8 @@ public class SliderView extends BorderPane {
 				sliderButtons[row*WIDTH + col].setOnAction(this::handleSliderButtonClicked);
 			}
 		}
+		controlsBar.getUndoButton().setOnAction(this::handleUndo);
 		controlsBar.getShuffleButton().setOnAction(this::handleShuffle);
-
 
 		/* ----- Add components ----- */
 		for (int row = 0; row < HEIGHT; row++) {
@@ -142,7 +142,12 @@ public class SliderView extends BorderPane {
             model.shuffle();
             this.updateGui();
         }
-    }
+	}
+	
+	private void handleUndo(ActionEvent event) {
+		model.undo();
+		this.updateGui();
+	}
 
 	/** Updates the view components based on the state stored by the model */
 	public void updateGui() {

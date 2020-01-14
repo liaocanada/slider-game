@@ -22,6 +22,7 @@ public class ControlsView extends BorderPane {
     private Label movesCounterLabel;
 	private Label winsCounterLabel;
 
+	private Button undoButton;
 	private Button shuffleButton;
 	private Button displayFullImageButton;
 	private Tooltip fullImageTooltip;
@@ -36,32 +37,34 @@ public class ControlsView extends BorderPane {
 		movesCounterLabel = new Label(this.formatMovesLabel(0));
         winsCounterLabel = new Label(this.formatWinsLabel(0));
         
-        buttons = new HBox();
+		buttons = new HBox();
+		undoButton = new Button();
+		undoButton.setGraphic(new ImageView(new Image("slider/images/undo-icon.png", 20, 20, true, true)));
 		shuffleButton = new Button("Reset & Shuffle");
-		String imageUrl = "slider/images/full-" + selectedTheme.ordinal() + ".png";
 		displayFullImageButton = new Button("Hover for full image");
-		fullImageTooltip = new Tooltip();
-		fullImage = new Image(imageUrl, 400, 400, true, true);
-
-
+		
 		/* ----- Spacing, padding, and CSS tags ----- */
 		this.setPadding(new Insets(10, 10, 10, 10));
         counters.setAlignment(Pos.CENTER_LEFT);
         counters.setSpacing(5);
         buttons.setSpacing(5);
-
+		
+		undoButton.getStyleClass().add("btn-default");
 		shuffleButton.getStyleClass().add("btn-warning");
 		displayFullImageButton.getStyleClass().add("btn-info");
         this.getStyleClass().add("controls");
         
 		/* ----- Attach on-hover tooltip ----- */
+		String imageUrl = "slider/images/full-" + selectedTheme.ordinal() + ".png";
+		fullImage = new Image(imageUrl, 400, 400, true, true);
+		fullImageTooltip = new Tooltip();
 		fullImageTooltip.setGraphic(new ImageView(fullImage));
 		displayFullImageButton.setTooltip(fullImageTooltip);
 
 
 		/* ----- Add components ----- */
         counters.getChildren().addAll(movesCounterLabel, winsCounterLabel);
-        buttons.getChildren().addAll(shuffleButton, displayFullImageButton);
+        buttons.getChildren().addAll(undoButton, shuffleButton, displayFullImageButton);
         this.setLeft(counters);
         this.setRight(buttons);
 
@@ -70,11 +73,17 @@ public class ControlsView extends BorderPane {
 
     public Button getShuffleButton() {
         return this.shuffleButton;
-    }
+	}
+	
+	public Button getUndoButton() {
+		return this.undoButton;
+	}
 
     public void updateGui() {
         movesCounterLabel.setText(this.formatMovesLabel(model.getNumMoves()));
 		winsCounterLabel.setText(this.formatWinsLabel(model.getNumWins()));
+		if (model.canUndo()) this.undoButton.setDisable(false);
+		else this.undoButton.setDisable(true);
     }
     private String formatMovesLabel(int moves) {
 		return "Moves: " + moves;
